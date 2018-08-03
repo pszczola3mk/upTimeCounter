@@ -25,7 +25,7 @@ public class PropsReader {
 			String propValue = prop.get().split(";")[1];
 			return propValue;
 		}catch (Exception e){
-			e.printStackTrace();
+			System.out.println("Ex: "+e.getMessage());
 			return "";
 		}
 	}

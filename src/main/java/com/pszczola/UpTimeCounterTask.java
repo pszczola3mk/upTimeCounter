@@ -19,17 +19,22 @@ public class UpTimeCounterTask implements Runnable {
 
 	@Override
 	public void run() {
+		System.out.println("Run: "+todayMinutes+", "+today);
 		this.todayMinutes = this.todayMinutes + 1;
 		this.lines.remove(0);
 		this.lines.add(0, this.today + ";" + this.todayMinutes);
 		try {
 			Files.write(Paths.get(UpTimeCounterApp.fileName), this.lines);
 			int maxMin = Integer.parseInt(PropsReader.readProp("maxMin"));
+			System.out.println("maxMin: "+maxMin);
+			System.out.println("todayMinutes: "+todayMinutes);
 			if (this.todayMinutes == maxMin) {
+				System.out.println("Send");
 				MailSender.sendMail(this.today, this.todayMinutes);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Ex: "+e.getMessage());
+
 		}
 	}
 }

@@ -19,6 +19,7 @@ public class UpTimeCounterApp {
 	public static String propfileName = "props.txt";
 
 	public static void main(String[] args) {
+		System.out.println("Start");
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 		String today = sdf.format(new Date());
 		int todayMinutes = 0;
@@ -38,7 +39,7 @@ public class UpTimeCounterApp {
 			Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(new UpTimeCounterTask(today, todayMinutes, lines), 0, 1, TimeUnit.MINUTES);
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Ex: "+e.getMessage());
 		}
 	}
 }
